@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 320px;
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #0f1115;
+    color: #e8e8e8;
+    font-size: 13px;
+  }
+  .header {
+    background: linear-gradient(135deg, #1a1d27, #232838);
+    padding: 14px 16px;
+    border-bottom: 1px solid #2a2f3e;
+  }
+  .header h1 { font-size: 15px; font-weight: 700; letter-spacing: 0.5px; }
+  .header .sub { color: #8b93a7; font-size: 11px; margin-top: 3px; }
+  .body { padding: 14px 16px 16px; }
+  .row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 9px 0; border-bottom: 1px solid #1e222d;
+  }
+  .row:last-child { border-bottom: none; }
+  .row .label { font-weight: 500; }
+  .row .hint { color: #8b93a7; font-size: 11px; margin-top: 2px; }
+  /* 开关 */
+  .switch { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+  .switch input { opacity: 0; width: 0; height: 0; }
+  .slider {
+    position: absolute; inset: 0; background: #333a4a; border-radius: 22px;
+    transition: 0.2s; cursor: pointer;
+  }
+  .slider::before {
+    content: ""; position: absolute; width: 16px; height: 16px;
+    left: 3px; top: 3px; background: #fff; border-radius: 50%; transition: 0.2s;
+  }
+  input:checked + .slider { background: #4f8cff; }
+  input:checked + .slider::before { transform: translateX(18px); }
+  /* 输入 */
+  input[type=number], textarea {
+    width: 100%; background: #171a22; border: 1px solid #2a2f3e;
+    color: #e8e8e8; border-radius: 6px; padding: 7px 9px; font-size: 12px;
+    margin-top: 6px; font-family: inherit;
+  }
+  textarea { resize: vertical; min-height: 64px; line-height: 1.6; }
+  input:focus, textarea:focus { outline: none; border-color: #4f8cff; }
+  .section-title { color: #8b93a7; font-size: 11px; margin: 12px 0 2px; }
+  /* 按钮 */
+  .btn {
+    width: 100%; padding: 9px; border: none; border-radius: 8px;
+    font-size: 13px; font-weight: 600; cursor: pointer; margin-top: 10px;
+    background: #4f8cff; color: #fff; transition: 0.15s;
+  }
+  .btn:hover { background: #3d7bf0; }
+  .btn.danger { background: #2a2f3e; color: #ff7b6e; }
+  .btn.danger:hover { background: #3a2530; }
+  .status {
+    margin-top: 12px; padding: 10px; border-radius: 8px;
+    background: #171a22; border: 1px solid #2a2f3e;
+    font-size: 11px; line-height: 1.7; color: #aab3c5;
+    max-height: 130px; overflow-y: auto; white-space: pre-wrap; word-break: break-all;
+  }
+  .status.ok { border-color: #2e7d4f; color: #7fd4a0; }
+  .status.warn { border-color: #8a6d1f; color: #e6c46a; }
+  /* 领域行 */
+  .area-row {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 7px 0; border-bottom: 1px solid #1e222d;
+  }
+  .area-row:last-child { border-bottom: none; }
+  .area-name { font-weight: 500; }
+  .area-controls { display: flex; align-items: center; gap: 8px; }
+  .area-controls input[type=checkbox] { width: 15px; height: 15px; accent-color: #4f8cff; }
+  .area-controls input[type=number] {
+    width: 56px; background: #171a22; border: 1px solid #2a2f3e;
+    color: #e8e8e8; border-radius: 6px; padding: 4px 6px; font-size: 12px;
+  }
+  .area-controls input[type=number]:focus { outline: none; border-color: #4f8cff; }
+  .area-note { color: #5a6275; font-size: 10px; margin-left: 4px; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <h1>🕊️ 身后名 Legacy Clean</h1>
+    <div class="sub">连续 N 天未使用 → 自动清历史 + 伪造积极记录</div>
+  </div>
+
+  <div class="body">
+    <div class="row">
+      <div>
+        <div class="label">启用功能</div>
+        <div class="hint">关闭后不再检测</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="enabled"><span class="slider"></span></label>
+    </div>
+
+    <div class="row">
+      <div>
+        <div class="label">触发天数</div>
+        <div class="hint">连续多少天不使用就触发（默认 14）</div>
+      </div>
+      <div><input type="number" id="days" min="1" max="365" style="width:70px;margin-top:0"></div>
+    </div>
+
+    <div class="row">
+      <div>
+        <div class="label">国内网络适配</div>
+        <div class="hint">开 = 只写国内能访问的网站；关 = 国内外全加</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="cnOnly" checked><span class="slider"></span></label>
+    </div>
+
+    <div class="row">
+      <div>
+        <div class="label">干跑模式（安全）</div>
+        <div class="hint">开 = 只报告不清真历史；关 = 真删</div>
+      </div>
+      <label class="switch"><input type="checkbox" id="dryRun" checked><span class="slider"></span></label>
+    </div>
+
+    <div class="section-title">伪造领域（勾选 + 填条数，0=不选）</div>
+    <div id="areas"></div>
+
+    <div class="section-title">自定义网址（可选，全部写入，每行一个）</div>
+    <textarea id="fakeUrls" placeholder="https://..."></textarea>
+
+    <button class="btn" id="save">💾 保存设置</button>
+    <button class="btn danger" id="pretend">⚰️ 假装我已死（立即测试）</button>
+
+    <div class="status" id="status">加载中...</div>
+  </div>
+
+<script src="popup.js"></script>
+</body>
+</html>
