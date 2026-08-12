@@ -19,6 +19,23 @@
 
 ## 📦 安装
 
+### 浏览器兼容性
+
+本扩展基于 **Chromium 内核（Manifest V3）**，所有 Chrome 系浏览器通用：
+
+| 浏览器 | 支持 | 说明 |
+|---|---|---|
+| ✅ Google Chrome | ✔️ | 地址栏 `chrome://extensions` |
+| ✅ Microsoft Edge | ✔️ | 地址栏 `edge://extensions` |
+| ✅ Opera | ✔️ | `opera://extensions` |
+| ✅ Brave | ✔️ | `brave://extensions` |
+| ✅ Vivaldi | ✔️ | `vivaldi://extensions` |
+| ✅ 360 浏览器 / QQ 浏览器 / 搜狗浏览器 / 猎豹浏览器 | ✔️ | 需切到 Chromium/极速内核模式 |
+| ❌ Safari（苹果） | ✖️ | 内核不同，不支持 |
+| ❌ Firefox（火狐） | ✖️ | API 不兼容 Manifest V3，不支持 |
+
+> 判断方法：该浏览器是否基于 Chromium 内核——是就能装，不是就不行。
+
 ### 方式一：源码安装（推荐，无需商店审核）
 
 1. 下载源码（或解压 zip）到本地文件夹，例如 `~/shenhouming/`
