@@ -6,12 +6,12 @@
 
 ## 第 1 步：下载插件文件
 
-1. 浏览器打开：`https://github.com/Hejiankun7/shenhouming`
+1. 浏览器打开：`https://github.com/minsisDream/shenhouming`
 2. 页面是英文的没关系，找绿色的 **「Code」** 按钮（页面右侧）
 3. 点它 → 下拉菜单里点 **「Download ZIP」**
 4. 浏览器会下载一个 `shenhouming-main.zip` 压缩包
 
-![提示] 如果下载很慢，可以用国内的加速镜像站，例如 `https://ghproxy.com/https://github.com/Hejiankun7/shenhouming/archive/refs/heads/main.zip`
+![提示] 如果下载很慢，可以用国内的加速镜像站，例如 `https://ghproxy.com/https://github.com/minsisDream/shenhouming/archive/refs/heads/main.zip`
 
 ## 第 2 步：解压
 
